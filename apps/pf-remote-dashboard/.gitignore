@@ -1,0 +1,49 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency overrides
+package-lock.json
+yarn.lock
+.pnpm-debug.log
+
+# dotenv environment variables
+.env
+.env.*.local
+.env.local
+
+# Editor and IDE config
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Coverage directory (used by Jest, etc.)
+coverage/
+
+# Lint and formatting
+.eslintcache
+.prettier-cache
+
+# Storybook static output
+storybook-static/
+
+# Optional: ignore local dev server SSL certs or secrets
+*.pem
+*.key
+*.crt

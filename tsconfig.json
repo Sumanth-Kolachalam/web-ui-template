@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "allowArbitraryExtensions": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "allowUnreachableCode": false,
+    "noUncheckedSideEffectImports": true,
+    "incremental": true,
+    "jsx": "react-jsx",
+    "composite": true
+  },
+  "files": [],
+  "references": [
+    { "path": "./apps/pf-remote-dashboard" },
+    { "path": "./apps/pf-ui-host" },
+    { "path": "./apps/pf-ui-components" }
+  ]
+}
