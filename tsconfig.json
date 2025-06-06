@@ -26,10 +26,10 @@
     "jsx": "react-jsx",
     "composite": true
   },
-  "files": [],
+  "include": ["**/tsconfig.eslint.json"],
   "references": [
     { "path": "./apps/pf-remote-dashboard" },
     { "path": "./apps/pf-ui-host" },
-    { "path": "./apps/pf-ui-components" }
+    { "path": "./apps/pf-ui-shell" }
   ]
 }
