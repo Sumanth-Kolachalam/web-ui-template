@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "webpack serve --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
+    "format": "prettier \"src/**/*.{ts,tsx}\" --write"
   },
   "keywords": [],
   "author": "BEL",

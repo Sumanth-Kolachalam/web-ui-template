@@ -1,17 +1,11 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy } from 'react';
 
-// Import the remote component
-const Button = lazy(() => import("UIComponents/Button"));
-const DashboardApp = lazy(() => import("Dashboard/App"));
+const hello = 'hello';
 
 const App = () => (
   <Suspense fallback={<div>Loading remote component...</div>}>
-    <Button label={"Click me"} />
-    <DashboardApp />
+    <p>Hi</p>
   </Suspense>
 );
 
 export default App;
-
-
-
