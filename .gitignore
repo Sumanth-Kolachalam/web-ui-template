@@ -26,7 +26,6 @@ yarn.lock
 .env.local
 
 # Editor and IDE config
-.vscode/
 .idea/
 *.suo
 *.ntvs*
