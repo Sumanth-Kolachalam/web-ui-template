@@ -5,10 +5,7 @@
   "main": "index.tsx",
   "private": true,
   "scripts": {
-    "dev": "webpack serve --mode development",
-    "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
-    "format": "prettier \"src/**/*.{ts,tsx}\" --write"
+    "dev": "webpack serve --mode development"
   },
   "keywords": [],
   "author": "BEL",

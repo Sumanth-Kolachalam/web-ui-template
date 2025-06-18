@@ -4,6 +4,5 @@
     "outDir": "dist",
     "noEmit": false
   },
-  "include": ["src"],
-  "references": [{ "path": "../pf-ui-components" }]
+  "include": ["src"]
 }

@@ -9,7 +9,10 @@
   "scripts": {
     "dev": "concurrently -n pf-ui-host,pf-remote-dashboard,pf-ui-components -c blue,green,cyan \"pnpm --filter pf-ui-host dev\" \"pnpm --filter pf-remote-dashboard dev\" \"pnpm --filter pf-ui-components dev\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint --ext .js,.ts,.tsx",
+    "format": "prettier",
+    "lint:fix": "eslint --ext .js,.ts,.tsx --fix --format=stylish",
+    "format:fix": "prettier --write",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -30,6 +33,7 @@
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-perf": "^3.3.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "postcss": "^8.5.3",
@@ -37,5 +41,9 @@
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.0"
+  },
+  "lint-staged": {
+    "apps/*/src/**/*.{js,ts,tsx}": ["pnpm lint:fix", "pnpm format:fix"],
+    "packages/*/src/**/*.{js,ts,tsx}": ["pnpm lint:fix", "pnpm format:fix"]
   }
 }
