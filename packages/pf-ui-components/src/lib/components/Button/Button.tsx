@@ -29,21 +29,9 @@ const getButtonStyle = (variant: ButtonProps['variant'] = 'primary') => {
   }
 };
 
-export const Button: React.FC<ButtonProps> = ({ label, variant = 'primary', style, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({ label, variant = 'primary', ...props }) => {
   return (
-    <button
-      style={{
-        padding: '0.5rem 1.25rem',
-        borderRadius: '0.375rem',
-        fontWeight: 600,
-        fontSize: '1rem',
-        cursor: 'pointer',
-        transition: 'background 0.2s',
-        ...getButtonStyle(variant),
-        ...style,
-      }}
-      {...props}
-    >
+    <button style={getButtonStyle(variant)} {...props}>
       {label}
     </button>
   );

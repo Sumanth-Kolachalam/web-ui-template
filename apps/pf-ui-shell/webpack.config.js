@@ -3,13 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const { ModuleFederationPlugin } = require('webpack').container;
 const deps = require('./package.json').dependencies;
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const envPathLocal = '.env';
 const envPathServer = '.env.production';
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
-  const isServer = env?.isServer === 'true';
 
   return {
     mode: isProduction ? 'production' : 'development',
@@ -18,11 +18,12 @@ module.exports = (env, argv) => {
 
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '/web/', // adjust based on where it's hosted
+      publicPath: 'auto', // adjust based on where it's hosted
       clean: true, // optional: clean output directory before build
     },
 
     resolve: {
+      symlinks: true,
       extensions: ['.js', '.jsx', '.ts', '.tsx'], // allows importing files without extensions
     },
 
@@ -32,9 +33,10 @@ module.exports = (env, argv) => {
           test: /\.(js|jsx|ts|tsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader',
+            loader: require.resolve("babel-loader"),
             options: {
               presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+              plugins: [!isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
             },
           },
         },
@@ -47,19 +49,13 @@ module.exports = (env, argv) => {
 
     plugins: [
       new ModuleFederationPlugin({
-        name: 'Host', // or hostApp depending on role
+        name: 'UIShell', // or hostApp depending on role
         filename: 'remoteEntry.js',
-        remotes: {
-          UIComponents: isServer
-            ? `UIComponents@/web/boilerplate/remoteEntry.js`
-            : 'UIComponents@http://localhost:8081/remoteEntry.js',
-          Dashboard: isServer
-            ? `Dashboard@/web/boilerplate/remoteEntry.js`
-            : 'Dashboard@http://localhost:8082/remoteEntry.js',
-        }, // optionally define remotes here
-        exposes: {}, // optionally expose components here
+        remotes: {}, // optionally define remotes here
+        exposes: {
+          
+        },
         shared: {
-          ...deps,
           react: {
             singleton: true,
             requiredVersion: deps.react,
@@ -80,6 +76,7 @@ module.exports = (env, argv) => {
             requiredVersion: deps.jotai,
             strictVersion: true,
           },
+          ...deps,
         },
       }),
 
@@ -88,21 +85,22 @@ module.exports = (env, argv) => {
       }),
 
       new Dotenv({
-        path: isServer ? envPathServer : envPathLocal,
+        path: isProduction ? envPathServer : envPathLocal,
         safe: true,
         systemvars: true,
       }),
-    ],
+    
+      !isProduction && new ReactRefreshWebpackPlugin(),
+    ].filter(Boolean),
 
     devServer: {
       static: {
         directory: path.join(__dirname, 'dist'),
-        publicPath: '/web/',
       },
-      port: 8080,
+      port: 8081,
       historyApiFallback: true,
       hot: true,
-      open: ['/web/'],
+      open: true,
     },
   };
 };

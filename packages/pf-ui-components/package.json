@@ -1,7 +1,7 @@
 {
   "name": "pf-ui-components",
   "version": "1.0.0",
-  "description": "",
+  "description": "React components library",
   "main": "index.tsx",
   "private": true,
   "scripts": {
@@ -14,13 +14,13 @@
   "author": "BEL",
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
-  "dependencies": {
-    "jotai": "^2.12.4",
-    "lodash": "^4.17.21",
+  "peerDependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "@babel/core": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
