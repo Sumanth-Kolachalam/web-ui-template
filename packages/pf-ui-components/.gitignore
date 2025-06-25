@@ -47,3 +47,5 @@ storybook-static/
 *.pem
 *.key
 *.crt
+
+*storybook.log
