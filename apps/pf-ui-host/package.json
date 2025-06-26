@@ -15,7 +15,8 @@
     "jotai": "^2.12.4",
     "lodash": "^4.17.21",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-error-boundary": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.27.1",
