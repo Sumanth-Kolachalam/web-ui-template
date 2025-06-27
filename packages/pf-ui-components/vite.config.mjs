@@ -34,7 +34,7 @@ export default defineConfig(({ command, mode }) => {
                 formats: ['es', 'cjs'],
                 fileName: (format) => `pf-ui-components.${format}.js`,
             },
-            outDir: '../dist',
+            outDir: './dist',
             sourcemap: isDev,
             minify: isProd ? 'esbuild' : false,
             rollupOptions: {

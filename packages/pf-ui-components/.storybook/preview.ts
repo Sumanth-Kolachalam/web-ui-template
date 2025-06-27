@@ -1,6 +1,7 @@
 // .storybook/preview.ts
 import type { Preview } from '@storybook/react-vite';
 import { withThemeByClassName, withThemeByDataAttribute } from '@storybook/addon-themes';
+import "../src/index.css";
 
 const preview: Preview = {
   parameters: {

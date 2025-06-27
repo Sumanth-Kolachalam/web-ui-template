@@ -82,6 +82,9 @@ module.exports = (env, argv) => {
             strictVersion: true,
           },
           ...deps,
+          'pf-ui-components': {
+            singleton: true,
+          },
         },
       }),
 
