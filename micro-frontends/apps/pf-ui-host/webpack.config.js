@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
 
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: 'auto', // adjust based on where it's hosted
+      publicPath: '/', // adjust based on where it's hosted
       clean: true, // optional: clean output directory before build
     },
 
@@ -36,7 +36,7 @@ module.exports = (env, argv) => {
             loader: require.resolve("babel-loader"),
             options: {
               presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
-              plugins: [ !isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
+              plugins: [!isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
             },
           },
         },
@@ -49,12 +49,17 @@ module.exports = (env, argv) => {
 
     plugins: [
       new ModuleFederationPlugin({
-        name: 'Dashboard', // or hostApp depending on role
+        name: 'Host', // or hostApp depending on role
         filename: 'remoteEntry.js',
-        remotes: {}, // optionally define remotes here
-        exposes: {
-          './App': './src/App.tsx',
-        }, // optionally expose components here
+        remotes: {
+          UIComponents: isProduction
+            ? `UIComponents@/web/boilerplate/remoteEntry.js`
+            : 'UIComponents@http://localhost:8081/remoteEntry.js',
+          Dashboard: isProduction
+            ? `Dashboard@boilerplate/remoteEntry.js`
+            : 'Dashboard@http://localhost:8082/remoteEntry.js',
+        }, // optionally define remotes here
+        exposes: {}, // optionally expose components here
         shared: {
           react: {
             singleton: true,
@@ -76,7 +81,20 @@ module.exports = (env, argv) => {
             requiredVersion: deps.jotai,
             strictVersion: true,
           },
+          "react-error-boundary": {
+            singleton: true,
+            requiredVersion: deps['react-error-boundary'],
+            strictVersion: true,
+          },
+          "react-router": {
+            singleton: true,
+            requiredVersion: deps['react-router'],
+            strictVersion: true,
+          },
           ...deps,
+          'pf-ui-components': {
+            singleton: true,
+          },
         },
       }),
 
@@ -89,18 +107,19 @@ module.exports = (env, argv) => {
         safe: true,
         systemvars: true,
       }),
-
+      
       !isProduction && new ReactRefreshWebpackPlugin(),
     ].filter(Boolean),
 
     devServer: {
       static: {
         directory: path.join(__dirname, 'dist'),
+        publicPath: '/',
       },
-      port: 8082,
+      port: 8080,
       historyApiFallback: true,
       hot: true,
-      open: false,
+      open: ['/'],
     },
   };
 };
