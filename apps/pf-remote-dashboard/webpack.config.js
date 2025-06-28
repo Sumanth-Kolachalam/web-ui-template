@@ -76,7 +76,20 @@ module.exports = (env, argv) => {
             requiredVersion: deps.jotai,
             strictVersion: true,
           },
+          "react-error-boundary": {
+            singleton: true,
+            requiredVersion: deps['react-error-boundary'],
+            strictVersion: true,
+          },
+          "react-router": {
+            singleton: true,
+            requiredVersion: deps['react-router'],
+            strictVersion: true,
+          },
           ...deps,
+          'pf-ui-components': {
+            singleton: true,
+          },
         },
       }),
 

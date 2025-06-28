@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
 
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '/web/', // adjust based on where it's hosted
+      publicPath: '/', // adjust based on where it's hosted
       clean: true, // optional: clean output directory before build
     },
 
@@ -56,7 +56,7 @@ module.exports = (env, argv) => {
             ? `UIComponents@/web/boilerplate/remoteEntry.js`
             : 'UIComponents@http://localhost:8081/remoteEntry.js',
           Dashboard: isProduction
-            ? `Dashboard@/web/boilerplate/remoteEntry.js`
+            ? `Dashboard@boilerplate/remoteEntry.js`
             : 'Dashboard@http://localhost:8082/remoteEntry.js',
         }, // optionally define remotes here
         exposes: {}, // optionally expose components here
@@ -79,6 +79,16 @@ module.exports = (env, argv) => {
           jotai: {
             singleton: true,
             requiredVersion: deps.jotai,
+            strictVersion: true,
+          },
+          "react-error-boundary": {
+            singleton: true,
+            requiredVersion: deps['react-error-boundary'],
+            strictVersion: true,
+          },
+          "react-router": {
+            singleton: true,
+            requiredVersion: deps['react-router'],
             strictVersion: true,
           },
           ...deps,
@@ -104,12 +114,12 @@ module.exports = (env, argv) => {
     devServer: {
       static: {
         directory: path.join(__dirname, 'dist'),
-        publicPath: '/web/',
+        publicPath: '/',
       },
       port: 8080,
       historyApiFallback: true,
       hot: true,
-      open: ['/web/'],
+      open: ['/'],
     },
   };
 };

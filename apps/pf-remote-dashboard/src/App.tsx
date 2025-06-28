@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import 'pf-ui-components/styles.css';
+import { Router } from './lib/router/Router';
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h1>Welcome to Your React App!</h1>
-      <p>This is the dashboard App component.</p>
-    </div>
+    <ErrorBoundary fallback={<div>Something went wrong!</div>}>
+      <Suspense fallback={<div>Loading remote component...</div>}>
+        <Router />
+      </Suspense>
+    </ErrorBoundary>
   );
-}
+};
 
 export default App;
