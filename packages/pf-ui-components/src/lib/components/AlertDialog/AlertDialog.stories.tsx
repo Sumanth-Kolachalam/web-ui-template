@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { Button } from '@/lib/components/Button/Button';
+
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -33,32 +35,28 @@ Includes subcomponents for trigger, content, header/footer, and actions.
 export default meta;
 type Story = StoryObj<typeof AlertDialog>;
 
-const Template = (dialogProps?: Partial<React.ComponentProps<typeof AlertDialog>>) => {
-  return (
-    <AlertDialog {...dialogProps}>
-      <AlertDialogTrigger>
-        <button className="px-4 py-2 rounded bg-primary text-white">Open Dialog</button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your data.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-};
-
 // 1. Default Story
 export const Default: Story = {
-  render: () => {
-    return Template();
+  render: (dialogProps?: Partial<React.ComponentProps<typeof AlertDialog>>) => {
+    return (
+      <AlertDialog {...dialogProps}>
+        <AlertDialogTrigger>
+          <Button>Open Dialog</Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your data.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
   },
 };
 
@@ -68,9 +66,7 @@ export const Danger: Story = {
     return (
       <AlertDialog>
         <AlertDialogTrigger>
-          <button className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700">
-            Delete Account
-          </button>
+          <Button variant={'destructive'}>Delete Account</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -97,7 +93,7 @@ export const WithLongContent: Story = {
     return (
       <AlertDialog>
         <AlertDialogTrigger>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded">Show Info</button>
+          <Button variant={'secondary'}>Show Info</Button>
         </AlertDialogTrigger>
         <AlertDialogContent className="max-h-[80vh] overflow-y-auto">
           <AlertDialogHeader>
@@ -131,7 +127,7 @@ export const WithCustomButtons: Story = {
     return (
       <AlertDialog>
         <AlertDialogTrigger>
-          <button className="border px-4 py-2 rounded">Trigger</button>
+          <Button variant={'outline'}>Trigger</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -156,7 +152,28 @@ export const WithCustomButtons: Story = {
 
 // 5. Open By Default
 export const OpenByDefault: Story = {
-  render: () => {
-    return Template({ defaultOpen: true });
+  args: {
+    defaultOpen: true,
+  },
+  render: (dialogProps?: Partial<React.ComponentProps<typeof AlertDialog>>) => {
+    return (
+      <AlertDialog {...dialogProps}>
+        <AlertDialogTrigger>
+          <Button>Open Dialog</Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your data.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
   },
 };
