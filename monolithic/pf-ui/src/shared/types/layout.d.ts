@@ -1,0 +1,108 @@
+import type { Button } from 'primereact/button';
+import React, { Dispatch, SetStateAction, HTMLAttributeAnchorTarget, ReactNode } from 'react';
+
+/* Breadcrumb Types */
+export interface AppBreadcrumbProps {
+    className?: string;
+}
+
+export interface Breadcrumb {
+    labels?: string[];
+    to?: string;
+}
+
+export interface BreadcrumbItem {
+    label: string;
+    to?: string;
+    items?: BreadcrumbItem[];
+}
+
+/* Context Types */
+export type LayoutState = {
+    staticMenuDesktopInactive: boolean;
+    overlayMenuActive: boolean;
+    profileSidebarVisible: boolean;
+    configSidebarVisible: boolean;
+    staticMenuMobileActive: boolean;
+    menuHoverActive: boolean;
+};
+
+export type LayoutConfig = {
+    ripple: boolean;
+    inputStyle: 'outlined' | 'filled';
+    menuMode: 'static' | 'overlay' | 'slim';
+    colorScheme: 'light' | 'dark';
+    theme: 'lara-light-indigo' | 'lara-dark-indigo';
+    scale: number;
+};
+
+export interface LayoutContextProps {
+    layoutConfig: LayoutConfig;
+    setLayoutConfig: Dispatch<SetStateAction<LayoutConfig>>;
+    layoutState: LayoutState;
+    setLayoutState: Dispatch<SetStateAction<LayoutState>>;
+    onMenuToggle: () => void;
+    showProfileSidebar: () => void;
+}
+
+export interface MenuContextProps {
+    activeMenu: string;
+    setActiveMenu: Dispatch<SetStateAction<string>>;
+}
+
+/* AppConfig Types */
+export interface AppConfigProps {
+    simple?: boolean;
+}
+
+/* AppTopbar Types */
+export type NodeRef = MutableRefObject<ReactNode>;
+export interface AppTopbarRef {
+    menubutton?: Button | null;
+    topbarmenu?: HTMLDivElement | null;
+    topbarmenubutton?: Button | null;
+}
+
+/* AppMenu Types */
+type CommandProps = {
+    originalEvent: React.MouseEvent<HTMLAnchorElement, MouseEvent>;
+    item: MenuModelItem;
+};
+
+export interface MenuProps {
+    model: MenuModel[];
+}
+
+export interface MenuModel {
+    label: string;
+    icon?: string;
+    items?: MenuModel[];
+    to?: string;
+    url?: string;
+    target?: HTMLAttributeAnchorTarget;
+    seperator?: boolean;
+}
+
+export interface AppMenuItem extends MenuModel {
+    items?: AppMenuItem[];
+    displayName: string;
+    link?: string;
+    path?: string;
+    apiEndpoint?: string;
+    badge?: 'UPDATED' | 'NEW';
+    badgeClass?: string;
+    class?: string;
+    preventExact?: boolean;
+    visible?: boolean;
+    disabled?: boolean;
+    replaceUrl?: boolean;
+    command?: ({ originalEvent, item }: CommandProps) => void;
+}
+
+export interface AppMenuItemProps {
+    item?: AppMenuItem;
+    parentKey?: string;
+    index?: number;
+    root?: boolean;
+    className?: string;
+}
