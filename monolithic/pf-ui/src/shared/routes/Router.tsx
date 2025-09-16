@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router';
-import { ErrorPage, Landing, Login } from '@shared/screens';
+import { Landing, Login } from '@shared/screens';
 // import { Landing, DynamicRemoteLoaderWrapper } from '@/screens/Landing';
 import { landingLoader } from '@shared/utils';
 import { AccessDeniedPage, NotFoundPage } from '@shared/screens';
 import { RouteLoaderError } from '@shared/screens/RouteLoaderError';
+import { DynamicModuleLoader } from '@shared/components/DynamicModuleLoader';
 // import { Public } from '@/screens/Public';
 // import SampleForm from '@/screens/SampleForm';
 
@@ -15,7 +16,18 @@ const Router = createBrowserRouter([
         path: '/web/landing/*',
         element: <Landing />,
         loader: landingLoader,
-        errorElement: <RouteLoaderError />
+        shouldRevalidate: ({ currentUrl, nextUrl }) => {
+            // ensures the loader is only run once for parent component
+            return !(
+                currentUrl.pathname.startsWith('/web/landing') &&
+                nextUrl.pathname.startsWith('/web/landing')
+            );
+        },
+        errorElement: <RouteLoaderError />,
+        children: [
+            { index: true, element: <div>Welcome to the Landing Page</div> },
+            { path: ':module/*', element: <DynamicModuleLoader /> },
+        ],
     },
     // {
     //     path: '/web/public/*',

@@ -6,12 +6,14 @@ import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useSafeContext } from '@shared/hooks/useSafeContext';
+import { useT } from '@shared/hooks';
 
 interface AppTopbarProps {
     ref?: React.Ref<AppTopbarRef>;
 }
 
 export function AppTopbar({ ref }: AppTopbarProps) {
+    const { t } = useT();
     const { logout, authToken, isLogoutSuccessfull } = useSafeContext(AuthContext);
     const navigate = useNavigate();
     const { layoutState, onMenuToggle, showProfileSidebar } = useSafeContext(LayoutContext);
@@ -50,7 +52,7 @@ export function AppTopbar({ ref }: AppTopbarProps) {
     return (
         <div className="layout-topbar">
             <div className="layout-topbar-logo">
-                <span>{import.meta.env.VITE_APP_TITLE}</span>
+                <span>{t('APP_TITLE')}</span>
             </div>
 
             <button

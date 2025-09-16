@@ -4,10 +4,24 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import path from 'path';
 
 export default defineConfig(({ mode }) => {
-    
     const env = loadEnv(mode, process.cwd(), '');
 
     return {
+        build: {
+            rollupOptions: {
+                output: {
+                    chunkFileNames: ({ name }) => {
+                        if (name?.includes('modules')) {
+                            const parts = name.split(path.sep);
+                            const moduleIndex = parts.indexOf('modules');
+                            const moduleName = parts[moduleIndex + 1];
+                            return `assets/module-${moduleName}-[hash].js`;
+                        }
+                        return `assets/[name]-[hash].js`;
+                    },
+                },
+            },
+        },
         plugins: [react(), visualizer()],
         resolve: {
             alias: {

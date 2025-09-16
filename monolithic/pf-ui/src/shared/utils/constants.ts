@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react';
+
 const STORAGE_KEYS = {
     AUTH_TOKEN: 'authToken',
     USER_DETAILS: 'userDetails',
@@ -5,8 +7,25 @@ const STORAGE_KEYS = {
     ROLE_IDS: 'selectedRoleIds',
 };
 
-const MODULES = {
+const LOCALISATION_MODULES = {
     COMMON: 'COMMON',
+};
+
+// has to match with folder names inside the modules folder
+const AVAILABLE_MODULES = {
+    admin: 'admin',
+    dashboard: 'dashboard',
+    irs: 'irs',
+    reports: 'reports',
+};
+
+const MODULES: Record<string, () => Promise<{ default: ComponentType }>> = {
+    [AVAILABLE_MODULES.dashboard]: () => {
+        return import('../../modules/dashboard/routes/Router.tsx');
+    },
+    [AVAILABLE_MODULES.reports]: () => {
+        return import('../../modules/reports/routes/Router.tsx');
+    },
 };
 
 const QUICK_LINKS: { label: string; value: string; url: string }[] = [
@@ -17,4 +36,4 @@ const QUICK_LINKS: { label: string; value: string; url: string }[] = [
     },
 ];
 
-export { STORAGE_KEYS, MODULES, QUICK_LINKS };
+export { STORAGE_KEYS, LOCALISATION_MODULES, QUICK_LINKS, AVAILABLE_MODULES, MODULES };

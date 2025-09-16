@@ -4,7 +4,7 @@ import { queryClient } from '@shared/utils';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorPage } from '@shared/screens';
 import { AuthProvider, LayoutProvider, TranslationProvider } from '@shared/components';
-import { MODULES } from '@shared/utils';
+import { LOCALISATION_MODULES } from '@shared/utils';
 import { translationsAtom } from '@shared/store';
 import { Suspense } from 'react';
 import { SuspenseFallback } from '@shared/components';
@@ -24,7 +24,7 @@ function App() {
                     <AuthProvider>
                         <LayoutProvider>
                             <TranslationProvider
-                                module={MODULES.COMMON}
+                                module={LOCALISATION_MODULES.COMMON}
                                 translationsAtom={translationsAtom}
                             >
                                 <Suspense fallback={<SuspenseFallback />}>

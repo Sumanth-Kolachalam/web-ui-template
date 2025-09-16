@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useEventListener, useUnmountEffect } from 'primereact/hooks';
 import { classNames } from 'primereact/utils';
 import { AppFooter, AppSidebar, AppTopbar } from '@shared/components';
 import { LayoutContext } from '@shared/utils';
-import { PrimeReactContext } from 'primereact/api';
+// import { PrimeReactContext } from 'primereact/api';
 import type { ChildContainerProps, LayoutState, AppTopbarRef } from '@shared/types';
 import { useSafeContext } from '@shared/hooks';
 
 const Layout = ({ children }: ChildContainerProps) => {
     const { layoutConfig, layoutState, setLayoutState } = useSafeContext(LayoutContext);
-    const { setRipple } = useContext(PrimeReactContext);
+    // const { setRipple } = useContext(PrimeReactContext);
     const topbarRef = useRef<AppTopbarRef>(null);
     const sidebarRef = useRef<HTMLDivElement>(null);
 

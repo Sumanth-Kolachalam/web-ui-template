@@ -1,7 +1,7 @@
-import { Suspense, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Layout } from './Layout';
 import { Outlet, useLoaderData } from 'react-router';
-import { LandingProvider, SuspenseFallback } from '@shared/components';
+import { LandingProvider } from '@shared/components';
 import type { ResourceItem, VMenuType } from '@shared/types';
 
 const Landing = () => {
@@ -20,9 +20,7 @@ const Landing = () => {
     return (
         <LandingProvider vmenu={vmenu}>
             <Layout>
-                <Suspense fallback={<SuspenseFallback />}>
-                    <Outlet />
-                </Suspense>
+                <Outlet />
             </Layout>
         </LandingProvider>
     );
