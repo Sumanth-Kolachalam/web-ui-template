@@ -58,4 +58,9 @@ interface AuthProviderProps {
     children: ReactNode;
 }
 
-export { LogoutParams, AuthContextValue, AuthProviderProps, LoginFormState, LoginResponse, UserDetails, Role, SelectedOrgId };
+interface OrgOption {
+    label: string;
+    value: string;
+}
+
+export { LogoutParams, AuthContextValue, AuthProviderProps, LoginFormState, LoginResponse, UserDetails, Role, SelectedOrgId, OrgOption };

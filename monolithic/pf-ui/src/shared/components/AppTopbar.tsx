@@ -15,9 +15,9 @@ export function AppTopbar({ ref }: AppTopbarProps) {
     const { logout, authToken, isLogoutSuccessfull } = useSafeContext(AuthContext);
     const navigate = useNavigate();
     const { layoutState, onMenuToggle, showProfileSidebar } = useSafeContext(LayoutContext);
-    const menubuttonRef = useRef<Button>(null);
+    const menubuttonRef = useRef<HTMLButtonElement>(null);
     const topbarmenuRef = useRef<HTMLDivElement>(null);
-    const topbarmenubuttonRef = useRef<Button>(null);
+    const topbarmenubuttonRef = useRef<HTMLButtonElement>(null);
 
     // Expose refs to parent
     useImperativeHandle(ref, () => {
@@ -50,26 +50,26 @@ export function AppTopbar({ ref }: AppTopbarProps) {
     return (
         <div className="layout-topbar">
             <div className="layout-topbar-logo">
-                <span>IFMIS</span>
+                <span>{import.meta.env.VITE_APP_TITLE}</span>
             </div>
 
-            <Button
+            <button
                 ref={menubuttonRef}
                 type="button"
                 className="p-link layout-menu-button layout-topbar-button"
                 onClick={onMenuToggle}
             >
                 <i className="pi pi-bars" />
-            </Button>
+            </button>
 
-            <Button
+            <button
                 ref={topbarmenubuttonRef}
                 type="button"
                 className="p-link layout-topbar-menu-button layout-topbar-button"
                 onClick={showProfileSidebar}
             >
                 <i className="pi pi-ellipsis-v" />
-            </Button>
+            </button>
 
             <div
                 ref={topbarmenuRef}

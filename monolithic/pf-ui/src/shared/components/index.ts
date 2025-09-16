@@ -7,3 +7,5 @@ export { LandingProvider } from './LandingProvider';
 export { TranslationProvider } from './TranslationProvider';
 export { LayoutProvider } from './LayoutProvider';
 export { SuspenseFallback } from './SuspenseFallBack';
+export { LanguageSwitcher } from './LanguageSwitcher';
+export { QuickLinksDropdown } from './QuickLinksDropdown';

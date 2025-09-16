@@ -9,6 +9,8 @@ import { translationsAtom } from '@shared/store';
 import { Suspense } from 'react';
 import { SuspenseFallback } from '@shared/components';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
 import '@shared/styles/layout.scss';
 import './App.css';
 import { RouterProvider } from 'react-router';

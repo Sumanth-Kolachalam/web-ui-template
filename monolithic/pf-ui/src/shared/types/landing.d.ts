@@ -16,4 +16,23 @@ interface VMenuType {
     label: string;
 }
 
-export { LandingContextType, Props, VMenuType };
+type Resource = {
+    id: string;
+    altName: string;
+    displayName: string;
+    type: string;
+    path: string;
+    orderNo: string;
+    label: string;
+    link?: string;
+    icon?: string;
+    enabled?: boolean;
+    apiEndpoint?: string;
+} & Record<string, unknown>;
+
+interface ResourceItem {
+    uuid: string;
+    resource?: Resource;
+}
+
+export { LandingContextType, Props, VMenuType, ResourceItem };

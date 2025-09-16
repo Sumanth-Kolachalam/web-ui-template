@@ -1,7 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { NodePackageImporter } from 'sass';
 import path from 'path';
 
 export default defineConfig(({ mode }) => {
@@ -14,13 +13,6 @@ export default defineConfig(({ mode }) => {
             alias: {
                 '@modules': path.resolve(__dirname, 'src/modules'),
                 '@shared': path.resolve(__dirname, 'src/shared'),
-            },
-        },
-        css: {
-            preprocessorOptions: {
-                scss: {
-                    importers: [new NodePackageImporter()],
-                },
             },
         },
         server: {
